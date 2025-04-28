@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MailVolt</title>
+    <title>MailVolt Advanced Email Security</title>
 
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
@@ -17,52 +17,46 @@
 </head>
 
 <body class="ms-font-m ms-welcome">
-    <header class="ms-welcome__header ms-bgColor-neutralLighter">
-        <img width="90" height="90" src="assets/icon-80.png" alt="MailVolt" title="MailVolt" />
-        <h1 class="ms-font-su">MailVolt</h1>
-    </header>
     <section id="sideload-msg" class="ms-welcome__main">
         <h2 class="ms-font-xl">Please sideload your add-in to see app body.</h2>
     </section>
-    <main id="app-body" class="ms-welcome__main" style="display: none;">
-        <div class="ms-welcome__main">
-            <h2 class="ms-font-xl">Email Security Validation</h2>
-            <div class="ms-List">
+    
+    <!-- Minimal Initial UI that stays out of the way -->
+    <main id="app-body" class="ms-welcome__main background-mode" style="display: none;">
+        <div id="minimal-ui" class="minimal-ui">
+            <div class="minimal-status">
+                <span id="minimal-status-indicator" class="status-indicator status-success"></span>
+                <span id="minimal-status-text" class="minimal-status-text">Monitoring for advanced issues</span>
+            </div>
+        </div>
+        
+        <!-- Advanced Warning UI that only appears when needed for issues Outlook doesn't catch -->
+        <div id="warning-ui" class="warning-ui" style="display: none;">
+            <h2 class="ms-font-l">Advanced Security Alert</h2>
+            <div class="warning-subtitle">Issues Outlook's native security might miss:</div>
+            <div id="validation-results" class="validation-results"></div>
+            <div class="button-container">
+                <button id="go-back-button" class="ms-Button ms-Button--default">
+                    <span class="ms-Button-label">Review</span>
+                </button>
+                <button id="proceed-button" class="ms-Button ms-Button--primary">
+                    <span class="ms-Button-label">Proceed Anyway</span>
+                </button>
+            </div>
+            <div id="client-settings" class="client-settings" style="display: none;">
                 <div class="ms-ListItem">
-                    <div class="ms-ListItem-primaryText">Select Client Organization</div>
+                    <div class="ms-ListItem-primaryText">Validation Settings</div>
                     <select id="client-select" class="ms-Dropdown">
-                        <option value="">Choose a client...</option>
+                        <option value="">Choose a client domain...</option>
                         <optgroup label="Microsoft 365">
                             <option value="xyz.com">XYZ Corporation</option>
                             <option value="abc.com">ABC Company</option>
                             <option value="123corp.com">123 Corporation</option>
                         </optgroup>
-                        <optgroup label="G-Suite">
-                            <option value="gsuite:company1.com">Company 1</option>
-                            <option value="gsuite:company2.com">Company 2</option>
-                            <option value="gsuite:company3.com">Company 3</option>
-                        </optgroup>
                     </select>
-                </div>
-                <div id="gsuite-auth-section" class="ms-ListItem" style="display: none;">
-                    <div class="ms-ListItem-primaryText">G-Suite Authentication</div>
-                    <button id="gsuite-auth-button" class="ms-Button">
-                        <span class="ms-Button-label">Connect G-Suite Account</span>
+                    <button id="settings-button" class="ms-Button settings-button">
+                        <span class="ms-Button-label">⚙️</span>
                     </button>
-                </div>
-                <div class="ms-ListItem">
-                    <div class="ms-ListItem-primaryText">Current Status</div>
-                    <div id="validation-status" class="status-text">
-                        No validation performed yet
-                    </div>
-                </div>
-                <div class="ms-ListItem">
-                    <button id="validate-button" class="ms-Button">
-                        <span class="ms-Button-label">Validate Recipients</span>
-                    </button>
-                </div>
-                <div class="ms-ListItem">
-                    <div id="validation-results" class="validation-results"></div>
                 </div>
             </div>
         </div>

@@ -73,6 +73,31 @@
                                     </Icon>
                                     <Action xsi:type="ShowTaskpane">
                                         <SourceLocation resid="Taskpane.Url" />
+                                        <SupportsPinning>true</SupportsPinning>
+                                    </Action>
+                                </Control>
+                            </Group>
+                        </OfficeTab>
+                    </ExtensionPoint>
+                    
+                    <!-- Auto-open on compose to enable background validation -->
+                    <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+                        <OfficeTab id="TabDefault">
+                            <Group id="autoOpenGroup">
+                                <Label resid="AutoOpenGroup.Label" />
+                                <Control xsi:type="Button" id="autoOpenButton">
+                                    <Label resid="AutoOpenButton.Label" />
+                                    <Supertip>
+                                        <Title resid="AutoOpenButton.Title" />
+                                        <Description resid="AutoOpenButton.Tooltip" />
+                                    </Supertip>
+                                    <Icon>
+                                        <bt:Image size="16" resid="Icon.16x16" />
+                                        <bt:Image size="32" resid="Icon.32x32" />
+                                        <bt:Image size="80" resid="Icon.80x80" />
+                                    </Icon>
+                                    <Action xsi:type="ExecuteFunction">
+                                        <FunctionName>autoOpenTaskpane</FunctionName>
                                     </Action>
                                 </Control>
                             </Group>
@@ -93,11 +118,15 @@
             </bt:Urls>
             <bt:ShortStrings>
                 <bt:String id="GroupLabel" DefaultValue="MailVolt" />
-                <bt:String id="TaskpaneButton.Label" DefaultValue="Check Recipients" />
-                <bt:String id="TaskpaneButton.Title" DefaultValue="Open MailVolt" />
+                <bt:String id="TaskpaneButton.Label" DefaultValue="Validate Recipients" />
+                <bt:String id="TaskpaneButton.Title" DefaultValue="MailVolt" />
+                <bt:String id="AutoOpenGroup.Label" DefaultValue="MailVolt Background" />
+                <bt:String id="AutoOpenButton.Label" DefaultValue="Monitor Recipients" />
+                <bt:String id="AutoOpenButton.Title" DefaultValue="Auto-Validate Recipients" />
             </bt:ShortStrings>
             <bt:LongStrings>
                 <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Check email recipients against allowed distribution lists" />
+                <bt:String id="AutoOpenButton.Tooltip" DefaultValue="Automatically monitor recipients for potential errors" />
             </bt:LongStrings>
         </Resources>
     </VersionOverrides>

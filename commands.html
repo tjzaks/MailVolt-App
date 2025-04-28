@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MailVolt Commands</title>
+    
+    <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
-    <script type="text/javascript">
-        // Office is ready
-        Office.onReady(function() {});
-    </script>
+    
+    <!-- Command implementation -->
+    <script type="text/javascript" src="commands.js"></script>
 </head>
-<body>
-    <!-- Note: This is a hidden page that handles add-in commands -->
+<body style="display:none">
+    <!-- This is an invisible page that hosts the command functions -->
 </body>
 </html> 

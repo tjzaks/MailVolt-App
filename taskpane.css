@@ -28,65 +28,139 @@ body {
     background: white;
 }
 
-.ms-welcome {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+/* Background mode styling */
+.background-mode {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
 }
 
-.ms-welcome__header {
-    padding: 20px;
-    background: white;
-    border-bottom: 1px solid var(--mailvolt-gray);
+.minimal-ui {
+    padding: 8px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
-.ms-welcome__header img {
-    width: 32px;
-    height: 32px;
+.minimal-ui:hover {
+    opacity: 1;
 }
 
-.ms-welcome__header h1 {
-    margin: 0;
-    font-size: 18px;
+.minimal-status {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: var(--mailvolt-dark-gray);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-success {
+    background-color: var(--success-color);
+}
+
+.status-warning {
+    background-color: var(--warning-color);
+}
+
+.status-error {
+    background-color: var(--error-color);
+}
+
+.minimal-status-text {
+    font-size: 12px;
+}
+
+/* Warning UI that appears when needed */
+.warning-ui {
+    padding: 12px;
+    border-radius: 6px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--warning-color);
+    max-width: 100%;
+}
+
+.warning-ui h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 16px;
     font-weight: 600;
+    color: var(--warning-color);
 }
 
-.ms-welcome__main {
-    padding: 20px;
-    flex: 1;
+.warning-subtitle {
+    font-size: 13px;
+    color: var(--mailvolt-dark-gray);
+    margin-bottom: 10px;
 }
 
+/* Settings section */
+.client-settings {
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 1px solid var(--mailvolt-gray);
+    display: flex;
+    align-items: center;
+}
+
+.settings-button {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    padding: 0;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--mailvolt-gray);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* MS components */
 .ms-List {
     max-width: 100%;
 }
 
 .ms-ListItem {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .ms-ListItem-primaryText {
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 12px;
+    margin-bottom: 6px;
     color: var(--mailvolt-dark-gray);
+    width: 100%;
 }
 
 .ms-Dropdown {
-    width: 100%;
-    padding: 8px;
+    flex: 1;
+    padding: 6px;
     border: 1px solid var(--mailvolt-gray);
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 13px;
     background: white;
 }
 
 .ms-Button {
-    padding: 8px 16px;
+    padding: 6px 12px;
     border: none;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -102,63 +176,61 @@ body {
     color: white;
 }
 
+/* Advanced warning styling */
 .validation-warning {
-    margin: 16px 0;
+    margin: 8px 0;
 }
 
-.recipients-list {
-    margin: 12px 0;
+.warning-list {
+    margin: 8px 0;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-.recipients-list span {
-    display: block;
+.warning-header {
+    font-size: 13px;
+    margin: 8px 0 6px 0;
+    color: var(--warning-color);
+}
+
+.email-warning {
     padding: 4px 8px;
     margin: 4px 0;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 13px;
     font-family: monospace;
-}
-
-.email-internal {
-    background-color: var(--internal-email-bg);
-    color: var(--mailvolt-dark-gray);
-}
-
-.email-valid {
-    background-color: var(--valid-email-bg);
-    color: var(--success-color);
-}
-
-.email-invalid {
     background-color: var(--invalid-email-bg);
+}
+
+.highlight-warning {
     color: var(--error-color);
+    font-weight: bold;
+    text-decoration: underline wavy var(--error-color);
+}
+
+.domain-list {
+    margin: 4px 0;
+}
+
+.domain-warning {
+    display: inline-block;
+    padding: 2px 6px;
+    margin: 2px;
+    background-color: var(--mailvolt-gray);
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.explanation-text {
+    font-size: 11px;
+    color: var(--mailvolt-dark-gray);
+    margin-top: 12px;
 }
 
 .button-container {
     display: flex;
     gap: 8px;
-    margin-top: 16px;
-}
-
-.status-text {
-    font-size: 14px;
-    margin: 8px 0;
-}
-
-.status-success {
-    color: var(--success-color);
-}
-
-.status-warning {
-    color: var(--warning-color);
-}
-
-.status-error {
-    color: var(--error-color);
-}
-
-.status-info {
-    color: var(--info-color);
+    margin-top: 12px;
 }
 
 #sideload-msg {
@@ -171,4 +243,22 @@ body {
     padding: 20px;
     font-size: 14px;
     color: var(--mailvolt-dark-gray);
+}
+
+/* Office.js native color-coding for emails in compose window */
+/* These classes will be injected into the Outlook compose window */
+.mv-email-internal {
+    color: var(--mailvolt-dark-gray) !important;
+    background-color: transparent !important;
+}
+
+.mv-email-valid {
+    color: var(--success-color) !important;
+    background-color: transparent !important;
+}
+
+.mv-email-invalid {
+    color: var(--error-color) !important;
+    background-color: transparent !important;
+    text-decoration: underline wavy var(--error-color) !important;
 } 

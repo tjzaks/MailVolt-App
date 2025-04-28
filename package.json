@@ -1,0 +1,44 @@
+{
+    "name": "mailvolt",
+    "version": "1.0.0",
+    "description": "Outlook add-in for secure email distribution list management",
+    "main": "taskpane.js",
+    "scripts": {
+        "start": "office-addin-debugging start manifest.xml",
+        "start:desktop": "office-addin-debugging start manifest.xml desktop",
+        "stop": "office-addin-debugging stop manifest.xml",
+        "validate": "office-addin-manifest validate manifest.xml",
+        "watch": "webpack --mode development --watch",
+        "build": "webpack --mode production",
+        "dev-server": "webpack serve --mode development"
+    },
+    "author": "Szakacs Media LLC",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.22.0",
+        "@babel/preset-env": "^7.22.0",
+        "@types/office-js": "^1.0.330",
+        "@types/office-runtime": "^1.0.23",
+        "babel-loader": "^9.1.2",
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^11.0.0",
+        "html-webpack-plugin": "^5.5.1",
+        "office-addin-cli": "^1.5.5",
+        "office-addin-debugging": "^5.0.5",
+        "office-addin-dev-certs": "^1.11.3",
+        "office-addin-lint": "^2.2.5",
+        "office-addin-manifest": "^1.12.3",
+        "office-addin-prettier-config": "^1.2.0",
+        "source-map-loader": "^4.0.1",
+        "webpack": "^5.84.1",
+        "webpack-cli": "^5.1.1",
+        "webpack-dev-server": "^4.15.0"
+    },
+    "dependencies": {
+        "core-js": "^3.30.2",
+        "regenerator-runtime": "^0.13.11"
+    },
+    "browserslist": [
+        "ie 11"
+    ]
+} 

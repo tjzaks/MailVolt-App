@@ -3,6 +3,7 @@
 
     let currentItem = null;
     let userDomain = null;
+    let gsuiteClient = null;
 
     Office.onReady(function () {
         if (Office.context.mailbox) {
@@ -16,19 +17,39 @@
             // Add event handler for the validate button
             document.getElementById("validate-button").addEventListener("click", validateEmails);
 
-            // Store the current item
-            currentItem = Office.context.mailbox.item;
+            // Add event handler for G-Suite authentication
+            document.getElementById("gsuite-auth-button").addEventListener("click", handleGSuiteAuth);
 
             // Add event listener for client selection
             document.getElementById("client-select").addEventListener("change", function() {
+                const selectedValue = this.value;
+                const gsuiteAuthSection = document.getElementById("gsuite-auth-section");
+                
+                if (selectedValue.startsWith("gsuite:")) {
+                    gsuiteAuthSection.style.display = "block";
+                } else {
+                    gsuiteAuthSection.style.display = "none";
+                }
+                
                 document.getElementById("validation-status").textContent = "";
                 document.getElementById("validation-results").innerHTML = "";
             });
+
+            // Store the current item
+            currentItem = Office.context.mailbox.item;
 
             // Monitor email input changes
             monitorEmailInput();
         }
     });
+
+    async function handleGSuiteAuth() {
+        // In a real implementation, you would:
+        // 1. Redirect to Google OAuth consent screen
+        // 2. Handle the OAuth callback
+        // 3. Initialize the GSuiteClient with the auth code
+        showStatus("G-Suite authentication not implemented yet", "warning");
+    }
 
     function monitorEmailInput() {
         // Get the current item's body
@@ -43,7 +64,7 @@
         });
     }
 
-    function validateEmails() {
+    async function validateEmails() {
         const clientDomain = document.getElementById("client-select").value;
         
         if (!clientDomain) {
@@ -83,10 +104,43 @@
 
                     const bccRecipients = asyncResult.value.map(recipient => recipient.emailAddress);
                     recipients.push(...bccRecipients);
-                    validateRecipientsList(recipients, clientDomain);
+                    
+                    if (clientDomain.startsWith("gsuite:")) {
+                        validateGSuiteRecipients(recipients, clientDomain);
+                    } else {
+                        validateRecipientsList(recipients, clientDomain);
+                    }
                 });
             });
         });
+    }
+
+    async function validateGSuiteRecipients(recipients, clientDomain) {
+        if (!gsuiteClient) {
+            showStatus("Please authenticate with G-Suite first", "warning");
+            return;
+        }
+
+        const results = {
+            internal: [], // Same domain as sender
+            valid: [],    // Valid external domains
+            invalid: []   // Potentially incorrect domains
+        };
+
+        for (const email of recipients) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) continue;
+
+            if (domain === userDomain) {
+                results.internal.push(email);
+            } else if (await gsuiteClient.validateEmailDomain(email)) {
+                results.valid.push(email);
+            } else {
+                results.invalid.push(email);
+            }
+        }
+
+        displayValidationResults(results, clientDomain);
     }
 
     function validateRecipientsList(recipients, clientDomain) {
@@ -109,6 +163,10 @@
             }
         });
 
+        displayValidationResults(results, clientDomain);
+    }
+
+    function displayValidationResults(results, clientDomain) {
         const resultsElement = document.getElementById("validation-results");
         resultsElement.innerHTML = "";
 

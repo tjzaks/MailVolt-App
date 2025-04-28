@@ -32,10 +32,23 @@
                     <div class="ms-ListItem-primaryText">Select Client Organization</div>
                     <select id="client-select" class="ms-Dropdown">
                         <option value="">Choose a client...</option>
-                        <option value="xyz.com">XYZ Corporation</option>
-                        <option value="abc.com">ABC Company</option>
-                        <option value="123corp.com">123 Corporation</option>
+                        <optgroup label="Microsoft 365">
+                            <option value="xyz.com">XYZ Corporation</option>
+                            <option value="abc.com">ABC Company</option>
+                            <option value="123corp.com">123 Corporation</option>
+                        </optgroup>
+                        <optgroup label="G-Suite">
+                            <option value="gsuite:company1.com">Company 1</option>
+                            <option value="gsuite:company2.com">Company 2</option>
+                            <option value="gsuite:company3.com">Company 3</option>
+                        </optgroup>
                     </select>
+                </div>
+                <div id="gsuite-auth-section" class="ms-ListItem" style="display: none;">
+                    <div class="ms-ListItem-primaryText">G-Suite Authentication</div>
+                    <button id="gsuite-auth-button" class="ms-Button">
+                        <span class="ms-Button-label">Connect G-Suite Account</span>
+                    </button>
                 </div>
                 <div class="ms-ListItem">
                     <div class="ms-ListItem-primaryText">Current Status</div>
